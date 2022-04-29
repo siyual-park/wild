@@ -8,8 +8,8 @@ type (
 func Compose(middlewares []Middleware) Middleware {
 	return func(next Handler) Handler {
 		c := next
-		for _, middleware := range middlewares {
-			c = middleware(c)
+		for i := len(middlewares); i >= 0; i -= 1 {
+			c = middlewares[i](c)
 		}
 		return c
 	}
